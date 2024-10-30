@@ -34,6 +34,10 @@ class _LoginPageState extends State<LoginPage> {
   final credential = CredentialModel();
   final credentialValidator = CredentialValidator();
 
+  bool isValid() {
+    return credentialValidator.validate(credential).isValid;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,9 +72,14 @@ class _LoginPageState extends State<LoginPage> {
                 autovalidateMode: AutovalidateMode.onUserInteraction,
               ),
               const SizedBox(height: 40),
-              OutlinedButton(
-                onPressed: () {},
-                child: const Text("Entrar"),
+              ListenableBuilder(
+                listenable: credential,
+                builder: (context, child) {
+                  return OutlinedButton(
+                    onPressed: isValid() ? () {} : null,
+                    child: const Text("Entrar"),
+                  );
+                },
               )
             ],
           ),

@@ -1,4 +1,6 @@
-class CredentialModel {
+import 'package:flutter/material.dart';
+
+class CredentialModel extends ChangeNotifier {
   String email;
   String password;
 
@@ -6,10 +8,12 @@ class CredentialModel {
 
   setEmail(String email) {
     this.email = email;
+    notifyListeners();
   }
 
   setPassword(String password) {
     this.password = password;
+    notifyListeners();
   }
 
   @override
